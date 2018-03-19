@@ -17,14 +17,14 @@ void loop()
 void requestEvent()
 {
   //called when RoboRIO request a message from this device
-  int output = 1;
+  int output = 12;
   //writes data to the RoboRIO, converts it to string
   Wire.write(output); 
 }
 
 // function that executes whenever data is received from master
 // this function is registered as an event, see setup()
-void receiveEvent(int howMany)
+void receiveEvent()
 {
   String LED;
  
@@ -35,10 +35,10 @@ void receiveEvent(int howMany)
   
   if (LED == "start"){
     digitalWrite(LED_BUILTIN, HIGH);
-    String number = "1";
-    Wire.write(number.c_str());
+    const char * stopCommand = "yes";
+    delay(2000);
+    Wire.write(stopCommand);
   }
-
   if (LED == "stop"){
     digitalWrite(LED_BUILTIN, LOW);
   }
